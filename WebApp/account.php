@@ -6,15 +6,16 @@
 
 <?php include("auth.php"); //include auth.php file on all secure pages ?>
 
-<div class="account">
-<h1><?php echo $_SESSION['username']?>'s User Control Panel</h1><br/>
+<div class="form">
+<p>This is a secured page.</p>
+Hello <?php echo $_SESSION['username']?>!
 <?php 
 $email = "";
-$query = "select user_email from `users` where user_name='".$_SESSION['username']."'";
+$query = "SELECT `Email` FROM `ACCOUNTS` WHERE `UserName`='".$_SESSION['username']."'";
 $result = $link->query($query);
 if($result){
 $emailtag = mysqli_fetch_assoc($result);
-$email = $emailtag['user_email'];}
+$email = $emailtag['Email'];}
 else
 	throw new Exception(mysqli_error($link)."[ $result]");
 ?>
@@ -22,25 +23,21 @@ else
 </p>
 
 <form id="account" type="text">
-Update Email Address<br/>
-&emsp;&emsp;<input id="email-address" type ="text" value=<?=$email?>><br/><br/>
+<p>Update Email Address</p>
+<input id="email-address" type ="text" value=<?=$email?>>
 
 
 <p> Change Password</p>
 
-&emsp;&emsp;<input id="change-pass" type ="text" value=""><br/><br/>
+<input id="change-pass" type ="text" value="">
 
 <p> Confirm Password Change </p>
 
-&emsp;&emsp;<input id="confirm-pass" type ="text" value=""><br/><br/>
+<input id="confirm-pass" type ="text" value="">
 <p>
 
-<p> Disable Admin Emails </p>
-&emsp;&emsp; <input type="checkbox" name="emails" value="disable"/> Check to disable.<br/><br/>
-<a href='feedback.php'>Leave Feedback for Admins</a><br/><br/>
-
-<input value="submit" class="button" type = "submit">
-<br/><br/></form>
+<input value="submit" type = "submit">
+</form>
 </div>
 
 
